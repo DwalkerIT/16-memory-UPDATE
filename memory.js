@@ -1,3 +1,8 @@
+// number of lives
+// list of iconS
+// 18 cards 9 pairs
+
+
 // make a list of icons
 //randomize the Icons
 
@@ -9,7 +14,7 @@
 const iconString = icons.map(icon => {
   return `<div class="grid-item">${icon}</div>`
 })
-const grid = querySelector('grid')
+const grid = querySelector('#grid')
 
 const icons = [
   'fas fa-umbrella-beach'
@@ -31,6 +36,15 @@ const icons = [
  'fas fa-dog'
  'fas fa-dog'
 ]
+
+const iconString = icons.map(icon => {
+  return `<div class="grid-item">
+  <span class="${icon}"></span>
+  </div>`
+}).join('')
+
+grid.innerHTML = iconString
+
 
 
 // - Have a "new game" screen with a single choice "new game"
