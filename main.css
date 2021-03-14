@@ -6,13 +6,25 @@
 
 #grid {
     display: grid;
+    margin: 20px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-column-gap: 20px;
+    grid-row-gap: 20px;
 }
 
 .grid-item {
     background-color: #7986cb;
     color: #fff;
-    padding: 20px;
+    padding: 100px;
     text-align: center;
+    font-size: 30px;
+    border-radius: 5px;
+}
+
+.grid-item-icon {
+    display: none;
+}
+
+.grid-item.active .grid-item-icon {
+    display:block
 }
