@@ -1,6 +1,6 @@
-import  icons   from './constants'
-import add, {shuffleArray, foo} from './utils.js'
-console.log(add(1,2))
+// import icons from "./constants";
+// import add, { shuffleArray, foo } from "./utils.js";
+// console.log(add(1, 2));
 // number of lives
 // list of iconS
 // 18 cards 9 pairs
@@ -8,35 +8,32 @@ console.log(add(1,2))
 // make a list of icons
 //randomize the Icons
 
-const grid = document.querySelector("#grid");
+const icons = [
+  "fas fa-umbrella-beach",
+  "fas fa-umbrella-beach",
+  "fas fa-house-user",
+  "fas fa-house-user",
+  "fas fa-dragon",
+  "fas fa-dragon",
+  "fab fa-wolf-pack-battalion",
+  "fab fa-wolf-pack-battalion",
+  "fas fa-sun",
+  "fas fa-sun",
+  "fas fa-moon",
+  "fas fa-moon",
+  "fas fa-star",
+  "fas fa-star",
+  "fab fa-linux",
+  "fab fa-linux",
+  "fas fa-dog",
+  "fas fa-dog",
+];
 
-// const icons = [
-//   "fas fa-umbrella-beach",
-//   "fas fa-umbrella-beach",
-//   "fas fa-house-user",
-//   "fas fa-house-user",
-//   "fas fa-dragon",
-//   "fas fa-dragon",
-//   "fab fa-wolf-pack-battalion",
-//   "fab fa-wolf-pack-battalion",
-//   "fas fa-sun",
-//   "fas fa-sun",
-//   "fas fa-moon",
-//   "fas fa-moon",
-//   "fas fa-star",
-//   "fas fa-star",
-//   "fab fa-linux",
-//   "fab fa-linux",
-//   "fas fa-dog",
-//   "fas fa-dog",
-// ];
-
-console.log(icons);
 // - Have a "new game" screen with a single choice "new game"
 
 // - The game should have a total of 9 pairs (18 cards total)
 
-const cardsArr = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9];
+// const cardsArr = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9];
 
 // randomize the cards during shuffle
 // function shuffle(array) {
@@ -49,6 +46,25 @@ const cardsArr = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9];
 //   }
 //   return newArray;
 // }
+function shuffle(array) {
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 
 const shuffled = shuffle(icons);
 // console.log(icons)
@@ -59,12 +75,15 @@ const iconString = shuffled
      </div>`;
   })
   .join("");
+console.log(shuffled);
+
+const grid = document.querySelector("#grid");
 
 grid.innerHTML = iconString;
 
 let card1 = null;
 let card2 = null;
-let lives = 8
+let lives = 8;
 
 grid.addEventListener("click", (e) => {
   const currentCard = e.target;
@@ -74,7 +93,7 @@ grid.addEventListener("click", (e) => {
     card2 = currentCard;
   } else {
     if (card2 && card2) {
-      return
+      return;
     }
   }
   // console.log(card1, card2)
@@ -85,11 +104,11 @@ grid.addEventListener("click", (e) => {
     const icon2 = card2.dataset.target;
 
     if (icon1 !== icon2) {
-      lives--
+      lives--;
       if (lives === 0) {
-        console.log('game over')
+        alert("GAME OVER SUPA LOSER(Arnold Schwarzenegger voice)");
       }
-    } else {
+
       // flip back after a second or something
       setTimeout(() => {
         card1.classList.remove("active");
@@ -98,13 +117,16 @@ grid.addEventListener("click", (e) => {
         card2 = null;
       }, 1000);
     } else {
-        card1 = null
-        card2 = null
-      }
+      card1 = null;
+      card2 = null;
     }
   }
-})
-
+});
+function drawLives() {
+  ctx.font = "16px Arial";
+  ctx.fillStyle = "#0095DD";
+  ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
+}
 //     // While there remain elements to shuffle...
 //     while (0 !== currentIndex) {
 //       // Pick a remaining element...
